@@ -22,7 +22,6 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
 
     <script>
-        // Configuración recibida de tu proyecto aterniamc-web
         const firebaseConfig = {
             apiKey: "AIzaSyCCQ_VYtiZB88PzpbOfA98wGqrG7k4qzSE",
             authDomain: "aterniamc-web.firebaseapp.com",
@@ -32,7 +31,6 @@
             appId: "1:748766671298:web:bd934aa81b246b9e0ba65b",
             measurementId: "G-LFB2EN182E"
         };
-        // Inicializar Firebase
         firebase.initializeApp(firebaseConfig);
     </script>
 
@@ -51,7 +49,6 @@
 
         body { font-family: 'Poppins', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; display: flex; text-transform: uppercase; transition: 0.3s; min-height: 100vh; overflow-x: hidden; }
 
-        /* AJUSTE SIDEBAR */
         .sidebar { 
             width: 280px; 
             background-color: var(--sidebar-bg); 
@@ -75,39 +72,22 @@
         .nav-item.active { background: var(--accent); color: #000; box-shadow: 0 0 20px var(--accent-glow); }
         .nav-item i { margin-right: 15px; width: 20px; text-align: center; }
 
-        /* SERVER STATUS CARD & COPY IP */
         .server-status-card { background: rgba(255,255,255,0.03); border-radius: 15px; padding: 20px; margin-top: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
         .server-status-card img { width: 50px; margin-bottom: 10px; filter: drop-shadow(0 0 5px var(--accent-glow)); }
         
         .ip-copy-box { 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 10px; 
-            background: rgba(0,0,0,0.2); 
-            padding: 8px; 
-            border-radius: 8px; 
-            cursor: pointer; 
-            transition: 0.3s;
-            position: relative;
+            display: flex; align-items: center; justify-content: center; gap: 10px; 
+            background: rgba(0,0,0,0.2); padding: 8px; border-radius: 8px; 
+            cursor: pointer; transition: 0.3s; position: relative;
         }
         .ip-copy-box:hover { background: rgba(255,255,255,0.05); }
         .ip-copy-box i { color: #555; font-size: 0.8rem; transition: 0.3s; }
         .ip-copy-box:hover i { color: var(--accent); }
         
-        /* Tooltip de Copiado */
         .copy-tooltip {
-            position: absolute;
-            top: -30px;
-            background: var(--accent);
-            color: #000;
-            padding: 4px 8px;
-            border-radius: 5px;
-            font-size: 0.6rem;
-            font-weight: 900;
-            opacity: 0;
-            transition: 0.3s;
-            pointer-events: none;
+            position: absolute; top: -30px; background: var(--accent); color: #000;
+            padding: 4px 8px; border-radius: 5px; font-size: 0.6rem; font-weight: 900;
+            opacity: 0; transition: 0.3s; pointer-events: none;
         }
         .copy-tooltip.show { opacity: 1; top: -35px; }
 
@@ -122,26 +102,20 @@
 
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); justify-content: center; align-items: center; }
         
-        /* MODAL DE ALERTAS ESPECÍFICO (MAYOR Z-INDEX) */
         #customAlert { z-index: 4000; }
         #passChangeModal, #cooldownModal { z-index: 3500; }
+        #langModal { z-index: 3000; }
+        #replyModal { z-index: 3200; }
+        #publishWarningModal, #deleteWarningModal, #replyWarningModal { z-index: 3600; }
+        #deleteSuccessModal, #replySuccessModal { z-index: 3800; }
 
         .modal-content { background: var(--card-bg); padding: 40px; border-radius: 25px; width: 90%; max-width: 450px; text-align: center; border: 2px solid var(--accent); box-shadow: 0 0 30px var(--accent-glow); animation: modalIn 0.3s; position: relative; box-sizing: border-box; }
         .modal-content h2 { margin-bottom: 25px; color: var(--accent); letter-spacing: 2px; font-size: 1.2rem; }
         
         .modal-content input, .modal-content textarea, .modal-content select { 
-            width: 100%; 
-            max-width: 100%; 
-            padding: 12px; 
-            margin-bottom: 15px; 
-            background: rgba(255,255,255,0.05); 
-            border: 1px solid #333; 
-            border-radius: 10px; 
-            color: white; 
-            outline: none; 
-            box-sizing: border-box; 
-            font-family: inherit; 
-            resize: vertical;
+            width: 100%; max-width: 100%; padding: 12px; margin-bottom: 15px; 
+            background: rgba(255,255,255,0.05); border: 1px solid #333; border-radius: 10px; 
+            color: white; outline: none; box-sizing: border-box; font-family: inherit; resize: vertical;
         }
 
         .modal-content select option { background: var(--card-bg); color: white; }
@@ -155,7 +129,6 @@
         @keyframes modalIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
 
-        /* ESTILOS ALERTAS PERSONALIZADAS */
         .custom-alert-content { border-width: 2px; border-style: solid; }
         .alert-error { border-color: var(--error); box-shadow: 0 0 20px var(--error-glow); }
         .alert-error h2 { color: var(--error); }
@@ -164,27 +137,49 @@
         .alert-success { border-color: var(--accent); box-shadow: 0 0 20px var(--accent-glow); }
         .alert-success h2 { color: var(--accent); }
 
-        /* BANNER ROJO ADVERTENCIA */
         .danger-banner {
-            background: rgba(255, 71, 87, 0.15);
-            border: 1px solid var(--error);
-            color: var(--error);
-            padding: 10px;
-            border-radius: 10px;
-            font-size: 0.65rem;
-            font-weight: 900;
-            margin-top: 15px;
-            text-transform: none;
-            line-height: 1.4;
+            background: rgba(255, 71, 87, 0.15); border: 1px solid var(--error); color: var(--error);
+            padding: 10px; border-radius: 10px; font-size: 0.65rem; font-weight: 900;
+            margin-top: 15px; text-transform: none; line-height: 1.4;
         }
 
-        .faq-card { background: var(--card-bg); padding: 25px; border-radius: 15px; border-left: 4px solid var(--accent); margin-bottom: 20px; }
-        .faq-author { color: var(--accent); font-weight: 900; font-size: 0.8rem; margin-bottom: 8px; display: block; }
-        .faq-text { text-transform: none; color: var(--lore-color); line-height: 1.5; font-size: 0.9rem; font-weight: 600; }
-        .faq-actions { margin-top: 12px; display: flex; gap: 15px; }
-        .btn-mini { background: none; border: none; color: #555; font-size: 0.65rem; font-weight: 900; cursor: pointer; transition: 0.3s; padding: 0; letter-spacing: 1px; }
-        .btn-mini:hover { color: var(--accent); }
-        .btn-delete:hover { color: #ff4757; }
+        /* FORO ESTILOS - Coincide con imagen 3 */
+        .faq-card { 
+            background: var(--card-bg); padding: 25px; border-radius: 15px; 
+            border-left: 4px solid var(--accent); margin-bottom: 20px; 
+        }
+        .faq-author-row {
+            display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+        }
+        .faq-author-avatar {
+            width: 30px; height: 30px; border-radius: 4px;
+        }
+        .faq-author-info {
+            display: flex; flex-direction: column;
+        }
+        .faq-author-name {
+            color: var(--text); font-weight: 900; font-size: 0.8rem;
+        }
+        .faq-author-tag {
+            color: #555; font-size: 0.6rem; font-weight: 700;
+        }
+        .faq-text { text-transform: none; color: var(--text); line-height: 1.5; font-size: 0.9rem; font-weight: 400; opacity: 0.8; }
+        .faq-actions { margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap; }
+        .faq-btn {
+            padding: 8px 16px; border-radius: 8px; font-size: 0.65rem; font-weight: 900;
+            cursor: pointer; transition: 0.3s; border: none; display: flex; align-items: center; gap: 6px;
+            letter-spacing: 1px;
+        }
+        .faq-btn-edit { background: var(--accent); color: #000; }
+        .faq-btn-edit:hover { filter: brightness(1.2); transform: translateY(-2px); }
+        .faq-btn-reply { background: var(--accent); color: #000; }
+        .faq-btn-reply:hover { filter: brightness(1.2); transform: translateY(-2px); }
+        .faq-btn-delete { background: var(--error); color: #fff; }
+        .faq-btn-delete:hover { filter: brightness(1.2); transform: translateY(-2px); }
+
+        /* Respuestas anidadas */
+        .faq-replies { margin-top: 15px; margin-left: 20px; border-left: 2px solid rgba(0,229,229,0.2); padding-left: 15px; }
+        .faq-reply-card { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 10px; margin-bottom: 10px; }
 
         .theme-switch { position: relative; width: 55px; height: 28px; cursor: pointer; }
         .theme-switch input { opacity: 0; width: 0; height: 0; }
@@ -201,22 +196,14 @@
         .card { background: var(--card-bg); padding: 35px; border-radius: 20px; text-align: center; transition: 0.4s; border: 1px solid rgba(255,255,255,0.05); }
         
         .news-cell { 
-            background: var(--card-bg); 
-            padding: 25px; 
-            border-radius: 15px; 
-            border-left: 4px solid var(--accent); 
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
+            background: var(--card-bg); padding: 25px; border-radius: 15px; 
+            border-left: 4px solid var(--accent); display: flex;
+            justify-content: space-between; align-items: flex-start;
         }
         .version-tag {
-            background: rgba(0, 229, 229, 0.1);
-            color: var(--accent);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.65rem;
-            font-weight: 900;
-            border: 1px solid var(--accent);
+            background: rgba(0, 229, 229, 0.1); color: var(--accent);
+            padding: 4px 10px; border-radius: 6px; font-size: 0.65rem;
+            font-weight: 900; border: 1px solid var(--accent);
         }
 
         .category-section { display: none; }
@@ -226,27 +213,61 @@
         .social-link { display: flex; align-items: center; gap: 12px; padding: 10px; color: #666; text-decoration: none; font-size: 0.8rem; transition: 0.3s; }
         .social-link:hover { color: var(--accent); transform: translateX(5px); }
 
-        /* ESTILO BOTÓN EDITAR PERFIL EN TOPBAR */
         .btn-topbar-edit {
+            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--accent);
+            color: var(--text); padding: 8px 15px; border-radius: 50px;
+            font-size: 0.75rem; font-weight: 900; cursor: pointer; transition: 0.3s;
+            display: none; align-items: center; gap: 8px;
+        }
+        .btn-topbar-edit:hover { background: var(--accent); color: #000; }
+
+        /* BOTÓN IDIOMA - Estilo cápsula como imagen 2 */
+        .lang-capsule {
+            display: flex; align-items: center; gap: 8px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--accent);
             color: var(--text);
             padding: 8px 15px;
             border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 900;
-            cursor: pointer;
-            transition: 0.3s;
-            display: none; /* Se muestra solo si hay login */
-            align-items: center;
-            gap: 8px;
+            font-size: 0.75rem; font-weight: 900;
+            cursor: pointer; transition: 0.3s;
         }
-        .btn-topbar-edit:hover {
-            background: var(--accent);
-            color: #000;
+        .lang-capsule:hover {
+            background: var(--accent); color: #000;
         }
+        .lang-capsule .lang-separator {
+            width: 1px; height: 16px; background: rgba(255,255,255,0.2);
+        }
+        .lang-capsule .lang-flag { font-size: 1.1rem; }
 
-        /* ESTILOS ESPECÍFICOS PERFIL - DISEÑO PDF */
+        /* MODAL IDIOMAS - Estilo como imagen 1 */
+        .lang-modal-content {
+            background: var(--card-bg); padding: 30px; border-radius: 20px;
+            width: 90%; max-width: 350px; text-align: center;
+            border: 2px solid var(--accent); box-shadow: 0 0 30px var(--accent-glow);
+            animation: modalIn 0.3s; box-sizing: border-box;
+        }
+        .lang-modal-content h2 {
+            margin-bottom: 20px; color: var(--accent); letter-spacing: 2px; font-size: 1rem;
+        }
+        .lang-modal-option {
+            display: flex; align-items: center; gap: 12px;
+            padding: 14px 18px; margin-bottom: 8px;
+            background: rgba(255,255,255,0.05); border-radius: 12px;
+            cursor: pointer; transition: 0.3s; font-weight: 700; font-size: 0.8rem;
+            color: #888;
+        }
+        .lang-modal-option:hover {
+            background: rgba(0, 229, 229, 0.15); color: var(--accent);
+            transform: translateX(5px);
+        }
+        .lang-modal-option.active-lang {
+            background: rgba(0, 229, 229, 0.15); color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+        .lang-modal-option .lang-flag { font-size: 1.3rem; }
+        .lang-modal-option .lang-code { color: #555; font-size: 0.65rem; font-weight: 900; }
+
         .profile-container { display: flex; gap: 20px; text-align: left; margin-bottom: 25px; }
         .profile-left { width: 150px; text-align: center; }
         .profile-right { flex: 1; }
@@ -266,62 +287,88 @@
             .modal-content { padding: 30px 20px; width: 95%; }
             .profile-container { flex-direction: column; align-items: center; }
         }
-
-        /* --- NUEVOS ESTILOS SELECTOR IDIOMAS (BLOQUE CORREGIDO) --- */
-        .lang-capsule {
-            display: flex; align-items: center; gap: 8px;
-            background: #000; /* Fondo negro según imagen 1 */
-            border: 2px solid var(--accent);
-            color: var(--accent);
-            padding: 8px 15px;
-            border-radius: 50px;
-            font-size: 0.75rem; font-weight: 900;
-            cursor: pointer; transition: 0.3s;
-            position: relative;
-        }
-        .lang-capsule:hover, .lang-capsule.open {
-            background: rgba(0, 229, 229, 0.1);
-            box-shadow: 0 0 15px var(--accent-glow); /* Resplandor al hover o abierto */
-        }
-        .lang-dropdown {
-            position: absolute; top: calc(100% + 10px); right: 0;
-            background: var(--card-bg);
-            border: 2px solid var(--accent); /* Borde cian según imagen 2 */
-            border-radius: 12px;
-            width: 130px;
-            opacity: 0; visibility: hidden;
-            transform: translateY(-10px);
-            transition: 0.3s; z-index: 500;
-            overflow: hidden;
-            box-shadow: 0 0 20px var(--accent-glow);
-        }
-        .lang-dropdown.open {
-            opacity: 1; visibility: visible;
-            transform: translateY(0);
-        }
-        .lang-option {
-            display: flex; align-items: center; gap: 10px;
-            padding: 12px 15px;
-            color: #888; font-size: 0.7rem; font-weight: 700;
-            transition: 0.3s;
-        }
-        .lang-option:hover {
-            background: rgba(0, 229, 229, 0.1);
-            color: var(--accent);
-        }
     </style>
 </head>
 <body>
 
     <div class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></div>
 
+    <!-- ALERTA PERSONALIZADA GENÉRICA -->
     <div id="customAlert" class="modal">
         <div id="alertBox" class="modal-content custom-alert-content">
             <h2 id="alertTitle" data-tr="alert_notice">AVISO</h2>
+            <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin-bottom:20px;">
             <p id="alertMsg" style="text-transform: none; font-size: 0.9rem; margin-bottom: 25px; color: #bbb;"></p>
+            <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin-bottom:20px;">
             <div id="alertActions" style="display: flex; gap: 10px; justify-content: center;">
+                <button id="alertCancelBtn" class="btn-action" style="min-width: 100px; display: none; background: var(--error); color: #fff;" data-tr="btn_cancel">CANCELAR</button>
                 <button id="alertConfirmBtn" class="btn-action" style="min-width: 100px;" data-tr="btn_accept">ACEPTAR</button>
-                <button id="alertCancelBtn" class="btn-action btn-outline" style="min-width: 100px; display: none;" data-tr="btn_cancel">CANCELAR</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL PUBLICAR ADVERTENCIA -->
+    <div id="publishWarningModal" class="modal">
+        <div class="modal-content custom-alert-content alert-warning">
+            <h2 data-tr="alert_warning_title">ADVERTENCIA</h2>
+            <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin-bottom:20px;">
+            <p style="text-transform: none; font-size: 0.9rem; color: #bbb; margin-bottom: 20px;" data-tr="publish_warning_msg">¿Seguro que quieres publicar este comentario?<br>Se puede eliminar después.</p>
+            <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin-bottom:20px;">
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button class="btn-action" style="min-width: 100px; background: var(--error); color: #fff;" onclick="closePublishWarning()" data-tr="btn_cancel">Cancelar</button>
+                <button class="btn-action" style="min-width: 100px;" onclick="confirmPublish()" data-tr="btn_confirm">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL ELIMINAR ADVERTENCIA -->
+    <div id="deleteWarningModal" class="modal">
+        <div class="modal-content custom-alert-content alert-warning">
+            <h2 data-tr="alert_warning_title">ADVERTENCIA</h2>
+            <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin-bottom:20px;">
+            <p style="text-transform: none; font-size: 0.9rem; color: #bbb; margin-bottom: 20px;" data-tr="delete_warning_msg">Realmente deseas eliminar este comentario?<br>Se eliminará permanentemente del foro.</p>
+            <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin-bottom:20px;">
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button class="btn-action" style="min-width: 100px; background: var(--error); color: #fff;" onclick="closeDeleteWarning()" data-tr="btn_cancel">Cancelar</button>
+                <button class="btn-action" style="min-width: 100px;" onclick="confirmDelete()" data-tr="btn_confirm">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL ELIMINAR ÉXITO -->
+    <div id="deleteSuccessModal" class="modal">
+        <div class="modal-content custom-alert-content alert-success">
+            <h2>ÉXITO</h2>
+            <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin-bottom:20px;">
+            <p style="text-transform: none; font-size: 0.9rem; color: #bbb; margin-bottom: 20px;" data-tr="delete_success_msg">Este comentario ha sido permanentemente eliminado del foro.</p>
+            <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin-bottom:20px;">
+            <button class="btn-action" style="min-width: 120px;" onclick="closeDeleteSuccess()" data-tr="btn_continue">Continuar</button>
+        </div>
+    </div>
+
+    <!-- MODAL RESPONDER -->
+    <div id="replyModal" class="modal">
+        <div class="modal-content custom-alert-content alert-success">
+            <h2 id="replyModalTitle">RESPONDIENDO A @USER</h2>
+            <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin-bottom:20px;">
+            <textarea id="replyTxt" rows="5" placeholder="ESCRIBE TU RESPUESTA..." data-tr-placeholder="placeholder_reply" style="font-size: 0.8rem; text-transform: none;"></textarea>
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button class="btn-action" style="min-width: 100px;" onclick="submitReply()" data-tr="btn_reply_action">RESPONDER</button>
+                <button class="btn-action" style="min-width: 100px; background: var(--error); color: #fff;" onclick="closeReplyModal()" data-tr="btn_cancel">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL RESPONDER ADVERTENCIA -->
+    <div id="replyWarningModal" class="modal">
+        <div class="modal-content custom-alert-content alert-warning">
+            <h2 data-tr="alert_warning_title">ADVERTENCIA</h2>
+            <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin-bottom:20px;">
+            <p style="text-transform: none; font-size: 0.9rem; color: #bbb; margin-bottom: 20px;" data-tr="reply_warning_msg">¿Realmente deseas responder este comentario?<br>Ten en cuenta las normativas para mantener una comunidad sana.</p>
+            <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin-bottom:20px;">
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button class="btn-action" style="min-width: 100px; background: var(--error); color: #fff;" onclick="cancelReplyWarning()" data-tr="btn_cancel">Cancelar</button>
+                <button class="btn-action" style="min-width: 100px;" onclick="confirmReply()" data-tr="btn_confirm">Confirmar</button>
             </div>
         </div>
     </div>
@@ -391,7 +438,7 @@
                 </div>
 
                 <div class="profile-right">
-                    <label class="profile-label" data-tr="label_nickname">APODO EN FORO</label>
+                    <label class="profile-label" data-tr="label_nickname">APODO EN EL FORO</label>
                     <input type="text" id="editNickname" placeholder="TU NOMBRE PÚBLICO" data-tr-placeholder="placeholder_nickname">
 
                     <label class="profile-label" data-tr="label_gender">GÉNERO</label>
@@ -443,6 +490,23 @@
             <div style="display: flex; gap: 10px;">
                 <button class="btn-action btn-outline" style="flex:1" onclick="closeEdit()" data-tr="btn_cancel">CANCELAR</button>
                 <button class="btn-action" style="flex:1" onclick="saveEdit()" data-tr="btn_save">GUARDAR</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL IDIOMAS -->
+    <div id="langModal" class="modal">
+        <div class="lang-modal-content">
+            <h2 data-tr="lang_title">IDIOMAS</h2>
+            <div class="lang-modal-option" id="langOptEs" onclick="selectLang('es')">
+                <span class="lang-flag">🇪🇸</span>
+                <span class="lang-code">ES</span>
+                <span>ESPAÑOL (ES)</span>
+            </div>
+            <div class="lang-modal-option" id="langOptEn" onclick="selectLang('en')">
+                <span class="lang-flag">🇺🇸</span>
+                <span class="lang-code">EN</span>
+                <span>ENGLISH (EN)</span>
             </div>
         </div>
     </div>
@@ -507,13 +571,13 @@
                 <i class="fas fa-user-edit"></i> <span data-tr="btn_edit_profile">EDITAR PERFIL</span>
             </button>
 
-            <div class="lang-capsule" onclick="toggleLangDropdown()">
+            <!-- Botón idioma estilo cápsula - abre modal -->
+            <div class="lang-capsule" onclick="openLangModal()">
                 <i class="fas fa-globe"></i>
-                <span id="currentLangText">🇪🇸 ES</span>
-                <div class="lang-dropdown" id="langDropdown">
-                    <div class="lang-option" onclick="selectLang('es')">🇪🇸 ES</div>
-                    <div class="lang-option" onclick="selectLang('en')">🇺🇸 EN</div>
-                </div>
+                <span class="lang-separator"></span>
+                <span class="lang-flag" id="currentLangFlag">🇪🇸</span>
+                <span id="currentLangText">ES</span>
+                <span id="currentLangLabel">ESPAÑOL (ES)</span>
             </div>
 
             <label class="theme-switch"><input type="checkbox" id="theme-toggle"><span class="slider"><i class="fas fa-sun" style="font-size:0.7rem; color:#f1c40f;"></i><i class="fas fa-moon" style="font-size:0.7rem; color:#f1c40f; margin-left:auto;"></i></span></label>
@@ -611,8 +675,7 @@
 
         <div id="otros" class="category-section">
             <h1><span style="color:var(--accent)" data-tr="nav_others">OTROS</span></h1>
-            <div id="otrosContent">
-                </div>
+            <div id="otrosContent"></div>
         </div>
 
         <div id="staff" class="category-section">
@@ -629,37 +692,47 @@
         <div id="faq" class="category-section">
             <h1><span data-tr="faq_q">PREGUNTAS</span> / <span style="color:var(--accent)">FAQ</span></h1>
             <div style="background:var(--card-bg); padding:25px; border-radius:15px; margin-bottom:30px; border: 1px solid rgba(255,255,255,0.05);">
-                <textarea id="faqTxt" style="width:100%; background:transparent; border:none; color:white; outline:none; font-family:inherit; resize:none;" rows="3" placeholder="ESCRIBE TU DUDA..." data-tr-placeholder="placeholder_faq"></textarea>
-                <button class="btn-action" style="margin-top: 10px;" onclick="postFaq()" data-tr="btn_publish">PUBLICAR</button>
+                <textarea id="faqTxt" style="width:100%; background:rgba(255,255,255,0.05); border:1px solid #333; border-radius:10px; color:white; outline:none; font-family:inherit; resize:none; padding: 15px; box-sizing: border-box; font-size: 0.85rem; text-transform: none;" rows="5" placeholder="ESCRIBE TU DUDA..." data-tr-placeholder="placeholder_faq"></textarea>
+                <button class="btn-action" style="margin-top: 15px; padding: 12px 30px;" onclick="tryPostFaq()" data-tr="btn_publish">PUBLICAR</button>
             </div>
+            <hr style="border:0; border-top:2px solid rgba(255,255,255,0.05); margin-bottom:25px;">
             <div id="faqList"></div>
         </div>
     </div>
 
     <script>
+        // --- REFERENCIAS FIREBASE ---
+        const db = firebase.database();
+
         // --- SISTEMA DE IDIOMAS ---
         const translations = {
             es: {
                 nav_home: "INICIO", nav_ranks: "RANGOS", nav_keys: "LLAVES", nav_donations: "DONACIONES", nav_about: "SOBRE EL", nav_others: "OTROS", nav_forum: "FORO",
                 side_community: "COMUNIDAD", side_social: "REDES SOCIALES", status_players: "JUGADORES", tooltip_copied: "¡COPIADO!",
-                btn_register: "REGISTRARSE", btn_login: "INICIAR SESIÓN", btn_edit_profile: "EDITAR PERFIL", btn_acquire: "ADQUIRIR", btn_donate: "DONAR", btn_choose_amt: "ELEGIR MONTO", btn_publish: "PUBLICAR", btn_cancel: "CANCELAR", btn_save: "GUARDAR CAMBIOS", btn_confirm: "CONFIRMAR", btn_accept: "ACEPTAR", btn_understood: "ENTENDIDO", btn_change_pass: "CAMBIAR CONTRASEÑA", btn_delete_account: "ELIMINAR MI CUENTA PERMANENTEMENTE",
+                btn_register: "REGISTRARSE", btn_login: "INICIAR SESIÓN", btn_edit_profile: "EDITAR PERFIL", btn_acquire: "ADQUIRIR", btn_donate: "DONAR", btn_choose_amt: "ELEGIR MONTO", btn_publish: "PUBLICAR", btn_cancel: "CANCELAR", btn_save: "GUARDAR CAMBIOS", btn_confirm: "CONFIRMAR", btn_accept: "ACEPTAR", btn_understood: "ENTENDIDO", btn_change_pass: "CAMBIAR CONTRASEÑA", btn_delete_account: "ELIMINAR MI CUENTA PERMANENTEMENTE", btn_continue: "CONTINUAR", btn_reply_action: "RESPONDER",
                 home_title_1: "NOTICIAS", home_title_2: "RECIENTES", news_1_title: "TIENDA OFICIAL LANZADA", news_1_desc: "Bienvenido a la plataforma de compras de Aternia MC.",
                 ranks_title_1: "RANGOS", ranks_title_2: "EXCLUSIVOS", ranks_no_benefits: "No existe beneficios actualmente. Proximamente...",
                 keys_title_1: "LLAVES Y", keys_title_2: "CRATES",
                 don_small: "PEQUEÑA", don_med: "MEDIANA", don_big: "GRANDE", don_free: "DONACIÓN LIBRE", don_open: "MONTO ABIERTO",
                 server_title: "SERVIDOR", about_history_title: "NUESTRA HISTORIA", about_history_text: "AterniaMC se originó con el objetivo del aprendizaje y diversión del creador, pero luego surgió una idea, crear un emprendimiento de este mismo.", about_focus_title: "ENFOQUE DEL SERVIDOR", about_focus_text: "Nuestro servidor se enfoca principalmente en Survival Vanilla, en donde los jugadores podrán recolectar recursos y progresar. El enfoque es mantener un entorno saludable, equilibrado y algo competitivo para los jugadores.", about_rules_title: "REGLAS GENERALES", about_tech_title: "INFORMACIÓN TÉCNICA", tech_version: "VERSIÓN:", tech_v_val: "TODAS LAS VERSIONES", tech_mode: "MODALIDAD:", tech_date: "FECHA DE CREACIÓN:", tech_d_val: "DICIEMBRE 2025", tech_comp: "COMPATIBILIDAD:", rule_1: "Se prohíbe el uso de hacks, cheats, o clientes modificados.", rule_2: "Mantén en todo momento respeto con otros jugadores, staff y creador...", rule_3: "Evita el spam en el chat.", rule_4: "Todo bug se reporta en la página web o discord...", rule_5: "No se permite el TPA KILL, este será severamente sancionado.", rule_6: "No se permite el pvp aunque esté activo.",
                 staff_title_1: "EQUIPO DE", staff_title_2: "STAFF", faq_q: "PREGUNTAS",
-                edit_profile_title: "EDITAR PERFIL", label_nickname: "APODO EN FORO", label_gender: "GÉNERO", opt_select_gender: "SELECCIONA GÉNERO", opt_male: "MASCULINO", opt_female: "FEMENINO", opt_nodecl: "PREFIERO NO DECIRLO", opt_other: "OTRO...", label_bio: "DESCRIPCIÓN BREVE", security_title: "SEGURIDAD Y CUENTA",
+                edit_profile_title: "EDITAR PERFIL", label_nickname: "APODO EN EL FORO", label_gender: "GÉNERO", opt_select_gender: "SELECCIONA GÉNERO", opt_male: "MASCULINO", opt_female: "FEMENINO", opt_nodecl: "PREFIERO NO DECIRLO", opt_other: "OTRO...", label_bio: "DESCRIPCIÓN BREVE", security_title: "SEGURIDAD Y CUENTA",
                 change_pass_title: "CAMBIAR CONTRASEÑA", old_pass_label: "CONTRASEÑA ANTERIOR", new_pass_label: "NUEVA CONTRASEÑA", pass_warning_banner: "ESTA PÁGINA NO CUENTA CON UN SISTEMA DE RECUPERACIÓN DE CUENTA. UNA VEZ SE ESTABLEZCA ESTA CONTRASEÑA, DEBES APUNTARLA Y/O GRABARLA.",
-                alert_notice: "AVISO", denied_access: "ACCESO DENEGADO", cooldown_msg: "No podrás cambiar tu contraseña todavía. Inténtalo de nuevo en:",
-                placeholder_mc_user: "USUARIO DE MINECRAFT", placeholder_email: "CORREO ELECTRÓNICO", placeholder_pass: "CONTRASEÑA", placeholder_nickname: "TU NOMBRE PÚBLICO", placeholder_bio: "CUÉNTANOS SOBRE TI...", placeholder_old_pass: "ESCRIBE TU CLAVE ACTUAL", placeholder_new_pass: "ESCRIBE TU NUEVA CLAVE", placeholder_faq: "ESCRIBE TU DUDA...", placeholder_which: "¿CUÁL?", placeholder_faq_edit: "EDITA TU MENSAJE...",
+                alert_notice: "AVISO", alert_warning_title: "ADVERTENCIA", denied_access: "ACCESO DENEGADO", cooldown_msg: "No podrás cambiar tu contraseña todavía. Inténtalo de nuevo en:",
+                placeholder_mc_user: "USUARIO DE MINECRAFT", placeholder_email: "CORREO ELECTRÓNICO", placeholder_pass: "CONTRASEÑA", placeholder_nickname: "TU NOMBRE PÚBLICO", placeholder_bio: "CUÉNTANOS SOBRE TI...", placeholder_old_pass: "ESCRIBE TU CLAVE ACTUAL", placeholder_new_pass: "ESCRIBE TU NUEVA CLAVE", placeholder_faq: "ESCRIBE TU DUDA...", placeholder_which: "¿CUÁL?", placeholder_faq_edit: "EDITA TU MENSAJE...", placeholder_reply: "ESCRIBE TU RESPUESTA...",
                 auth_error: "CORREO O CONTRASEÑA INCORRECTOS", edit_question: "EDITAR PREGUNTA",
-                key_comun: "COMÚN", key_raro: "RARO", key_epico: "ÉPICO", key_legendario: "LEGENDARIO", key_mitico: "MÍTICO", key_exotico: "EXÓTICO"
+                key_comun: "COMÚN", key_raro: "RARO", key_epico: "ÉPICO", key_legendario: "LEGENDARIO", key_mitico: "MÍTICO", key_exotico: "EXÓTICO",
+                lang_title: "IDIOMAS",
+                publish_warning_msg: "¿Seguro que quieres publicar este comentario?\nSe puede eliminar después.",
+                delete_warning_msg: "Realmente deseas eliminar este comentario?\nSe eliminará permanentemente del foro.",
+                delete_success_msg: "Este comentario ha sido permanentemente eliminado del foro.",
+                reply_warning_msg: "¿Realmente deseas responder este comentario?\nTen en cuenta las normativas para mantener una comunidad sana.",
+                faq_edit_btn: "EDITAR COMENTARIO", faq_reply_btn: "RESPONDER", faq_delete_btn: "ELIMINAR COMENTARIO"
             },
             en: {
                 nav_home: "HOME", nav_ranks: "RANKS", nav_keys: "KEYS", nav_donations: "DONATIONS", nav_about: "ABOUT", nav_others: "OTHERS", nav_forum: "FORUM",
                 side_community: "COMMUNITY", side_social: "SOCIAL MEDIA", status_players: "PLAYERS", tooltip_copied: "COPIED!",
-                btn_register: "REGISTER", btn_login: "LOGIN", btn_edit_profile: "EDIT PROFILE", btn_acquire: "ACQUIRE", btn_donate: "DONATE", btn_choose_amt: "CHOOSE AMOUNT", btn_publish: "PUBLISH", btn_cancel: "CANCEL", btn_save: "SAVE CHANGES", btn_confirm: "CONFIRM", btn_accept: "ACCEPT", btn_understood: "UNDERSTOOD", btn_change_pass: "CHANGE PASSWORD", btn_delete_account: "DELETE ACCOUNT PERMANENTLY",
+                btn_register: "REGISTER", btn_login: "LOGIN", btn_edit_profile: "EDIT PROFILE", btn_acquire: "ACQUIRE", btn_donate: "DONATE", btn_choose_amt: "CHOOSE AMOUNT", btn_publish: "PUBLISH", btn_cancel: "CANCEL", btn_save: "SAVE CHANGES", btn_confirm: "CONFIRM", btn_accept: "ACCEPT", btn_understood: "UNDERSTOOD", btn_change_pass: "CHANGE PASSWORD", btn_delete_account: "DELETE ACCOUNT PERMANENTLY", btn_continue: "CONTINUE", btn_reply_action: "REPLY",
                 home_title_1: "RECENT", home_title_2: "NEWS", news_1_title: "OFFICIAL STORE LAUNCHED", news_1_desc: "Welcome to the Aternia MC shopping platform.",
                 ranks_title_1: "EXCLUSIVE", ranks_title_2: "RANKS", ranks_no_benefits: "No benefits currently. Coming soon...",
                 keys_title_1: "KEYS AND", keys_title_2: "CRATES",
@@ -668,40 +741,66 @@
                 staff_title_1: "STAFF", staff_title_2: "TEAM", faq_q: "QUESTIONS",
                 edit_profile_title: "EDIT PROFILE", label_nickname: "FORUM NICKNAME", label_gender: "GENDER", opt_select_gender: "SELECT GENDER", opt_male: "MALE", opt_female: "FEMALE", opt_nodecl: "PREFER NOT TO SAY", opt_other: "OTHER...", label_bio: "SHORT BIO", security_title: "SECURITY & ACCOUNT",
                 change_pass_title: "CHANGE PASSWORD", old_pass_label: "OLD PASSWORD", new_pass_label: "NEW PASSWORD", pass_warning_banner: "THIS PAGE DOES NOT HAVE AN ACCOUNT RECOVERY SYSTEM. ONCE SET, RECORD THIS PASSWORD.",
-                alert_notice: "NOTICE", denied_access: "ACCESS DENIED", cooldown_msg: "You cannot change your password yet. Try again in:",
-                placeholder_mc_user: "MINECRAFT USERNAME", placeholder_email: "EMAIL ADDRESS", placeholder_pass: "PASSWORD", placeholder_nickname: "YOUR PUBLIC NAME", placeholder_bio: "TELL US ABOUT YOURSELF...", placeholder_old_pass: "ENTER CURRENT KEY", placeholder_new_pass: "ENTER NEW KEY", placeholder_faq: "TYPE YOUR QUESTION...", placeholder_which: "WHICH ONE?", placeholder_faq_edit: "EDIT YOUR MESSAGE...",
+                alert_notice: "NOTICE", alert_warning_title: "WARNING", denied_access: "ACCESS DENIED", cooldown_msg: "You cannot change your password yet. Try again in:",
+                placeholder_mc_user: "MINECRAFT USERNAME", placeholder_email: "EMAIL ADDRESS", placeholder_pass: "PASSWORD", placeholder_nickname: "YOUR PUBLIC NAME", placeholder_bio: "TELL US ABOUT YOURSELF...", placeholder_old_pass: "ENTER CURRENT KEY", placeholder_new_pass: "ENTER NEW KEY", placeholder_faq: "TYPE YOUR QUESTION...", placeholder_which: "WHICH ONE?", placeholder_faq_edit: "EDIT YOUR MESSAGE...", placeholder_reply: "TYPE YOUR REPLY...",
                 auth_error: "INCORRECT EMAIL OR PASSWORD", edit_question: "EDIT QUESTION",
-                key_comun: "COMMON", key_raro: "RARE", key_epico: "EPIC", key_legendario: "LEGENDARY", key_mitico: "MYTHICAL", key_exotico: "EXOTIC"
+                key_comun: "COMMON", key_raro: "RARE", key_epico: "EPIC", key_legendario: "LEGENDARY", key_mitico: "MYTHICAL", key_exotico: "EXOTIC",
+                lang_title: "LANGUAGES",
+                publish_warning_msg: "Are you sure you want to publish this comment?\nIt can be deleted later.",
+                delete_warning_msg: "Do you really want to delete this comment?\nIt will be permanently removed from the forum.",
+                delete_success_msg: "This comment has been permanently deleted from the forum.",
+                reply_warning_msg: "Do you really want to reply to this comment?\nPlease keep in mind the guidelines to maintain a healthy community.",
+                faq_edit_btn: "EDIT COMMENT", faq_reply_btn: "REPLY", faq_delete_btn: "DELETE COMMENT"
             }
         };
 
-        // --- FUNCIONES LÓGICA BOTÓN IDIOMAS (BLOQUE CORREGIDO) ---
-        function toggleLangDropdown() {
-            const dropdown = document.getElementById('langDropdown');
-            const capsule = document.querySelector('.lang-capsule');
-            dropdown.classList.toggle('open');
-            capsule.classList.toggle('open');
+        // --- IDIOMA: almacenado en Firebase si hay sesión, sino cookie ---
+        let currentLang = 'es';
+
+        function openLangModal() {
+            updateLangModalActive();
+            document.getElementById('langModal').style.display = 'flex';
         }
 
-        // Cerrar menú si se hace clic fuera
-        window.addEventListener('click', function(e) {
-            if (!document.querySelector('.lang-capsule').contains(e.target)) {
-                document.getElementById('langDropdown').classList.remove('open');
-                document.querySelector('.lang-capsule').classList.remove('open');
-            }
+        function closeLangModal() {
+            document.getElementById('langModal').style.display = 'none';
+        }
+
+        // Cerrar modal idiomas al hacer clic fuera
+        document.getElementById('langModal').addEventListener('click', function(e) {
+            if (e.target === this) closeLangModal();
         });
 
+        function updateLangModalActive() {
+            document.getElementById('langOptEs').classList.toggle('active-lang', currentLang === 'es');
+            document.getElementById('langOptEn').classList.toggle('active-lang', currentLang === 'en');
+        }
+
         function selectLang(lang) {
-            localStorage.setItem('prefLang', lang);
+            currentLang = lang;
+            // Guardar en Firebase si hay usuario logueado
+            const user = firebase.auth().currentUser;
+            if (user) {
+                db.ref('users/' + user.uid + '/preferences/lang').set(lang);
+            }
+            // Fallback: cookie (no localStorage)
+            document.cookie = 'prefLang=' + lang + ';path=/;max-age=31536000';
+
             updateUITranslations(lang);
-            // Actualizar el texto del botón principal
-            const textEl = document.getElementById('currentLangText');
-            textEl.innerText = lang === 'es' ? '🇪🇸 ES' : '🇺🇸 EN';
-            // Cerrar menú
-            document.getElementById('langDropdown').classList.remove('open');
-            document.querySelector('.lang-capsule').classList.remove('open');
-            // Refrescar llaves (para el nombre traducido)
+            updateLangButton(lang);
+            closeLangModal();
             renderLlaves();
+        }
+
+        function updateLangButton(lang) {
+            document.getElementById('currentLangFlag').innerText = lang === 'es' ? '🇪🇸' : '🇺🇸';
+            document.getElementById('currentLangText').innerText = lang === 'es' ? 'ES' : 'EN';
+            document.getElementById('currentLangLabel').innerText = lang === 'es' ? 'ESPAÑOL (ES)' : 'ENGLISH (EN)';
+        }
+
+        function getCookie(name) {
+            const v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+            return v ? v[2] : null;
         }
 
         function updateUITranslations(lang) {
@@ -716,7 +815,7 @@
             renderFaq();
         }
 
-        // --- RAREZAS CON LLAVES DE TRADUCCIÓN ---
+        // --- RAREZAS ---
         const RAREZAS = [
             {id:'key_comun', c:'var(--comun)', p:0.50}, 
             {id:'key_raro', c:'var(--raro)', p:1.50},
@@ -728,9 +827,8 @@
 
         function renderLlaves() {
             const container = document.getElementById('llavesContainer');
-            const lang = localStorage.getItem('prefLang') || 'es';
+            const lang = currentLang;
             const buyText = translations[lang].btn_acquire;
-            
             if(!container) return;
             container.innerHTML = '';
             RAREZAS.forEach(r => {
@@ -745,11 +843,28 @@
             });
         }
 
-        // --- RESTO DEL CÓDIGO FUNCIONAL ---
-        let posts = JSON.parse(localStorage.getItem('faqPosts')) || [];
+        // --- FORO: FIREBASE REALTIME DATABASE ---
+        let posts = [];
         let editingId = null;
         let currentAuthType = 'INICIAR SESIÓN';
         let cooldownInterval = null;
+        let pendingDeleteId = null;
+        let pendingReplyPostId = null;
+        let pendingReplyText = '';
+
+        // Cargar posts desde Firebase
+        function loadForumPosts() {
+            db.ref('forum/posts').orderByChild('timestamp').on('value', (snapshot) => {
+                posts = [];
+                snapshot.forEach((child) => {
+                    const post = child.val();
+                    post.firebaseKey = child.key;
+                    posts.push(post);
+                });
+                posts.reverse(); // más recientes primero
+                renderFaq();
+            });
+        }
 
         function showCustomAlert(title, msg, type = 'success', onConfirm = null, onCancel = null) {
             const modal = document.getElementById('customAlert');
@@ -767,15 +882,20 @@
             modal.style.display = 'flex';
         }
 
+        // --- COOLDOWN DE CONTRASEÑA: FIREBASE ---
         function startPassChangeFlow() {
-            const lastChange = localStorage.getItem('lastPassChange');
-            const now = Date.now();
-            const weekInMs = 7 * 24 * 60 * 60 * 1000;
-            if(lastChange && (now - lastChange < weekInMs)) {
-                openCooldown(weekInMs - (now - lastChange));
-            } else {
-                showCustomAlert("¿Estás seguro?", "Solo puedes cambiar tu contraseña una vez cada 7 días.", "warning", () => { openPassChangeModal(); }, () => {});
-            }
+            const user = firebase.auth().currentUser;
+            if (!user) return;
+            db.ref('users/' + user.uid + '/security/lastPassChange').once('value', (snap) => {
+                const lastChange = snap.val();
+                const now = Date.now();
+                const weekInMs = 7 * 24 * 60 * 60 * 1000;
+                if(lastChange && (now - lastChange < weekInMs)) {
+                    openCooldown(weekInMs - (now - lastChange));
+                } else {
+                    showCustomAlert("¿Estás seguro?", "Solo puedes cambiar tu contraseña una vez cada 7 días.", "warning", () => { openPassChangeModal(); }, () => {});
+                }
+            });
         }
 
         function openCooldown(timeLeft) {
@@ -808,7 +928,8 @@
             const credential = firebase.auth.EmailAuthProvider.credential(user.email, oldPass);
             user.reauthenticateWithCredential(credential).then(() => {
                 user.updatePassword(newPass).then(() => {
-                    localStorage.setItem('lastPassChange', Date.now());
+                    // Guardar en Firebase
+                    db.ref('users/' + user.uid + '/security/lastPassChange').set(Date.now());
                     closePassChange();
                     saveProfile(true); 
                 }).catch(e => showCustomAlert("ERROR", "Nueva contraseña no válida.", "error"));
@@ -823,7 +944,6 @@
             document.getElementById(id).classList.add('active');
             if(document.getElementById('nav-'+id)) document.getElementById('nav-'+id).classList.add('active');
             if(window.innerWidth <= 992) document.getElementById('sidebar').classList.remove('open');
-            if(id === 'faq') renderFaq();
         }
 
         function copyIP() {
@@ -876,29 +996,41 @@
             if (currentAuthType === 'REGISTRARSE') {
                 firebase.auth().createUserWithEmailAndPassword(email, pass)
                     .then((userCredential) => { return userCredential.user.updateProfile({ displayName: user }); })
-                    .then(() => { localStorage.setItem('u', user); location.reload(); })
+                    .then(() => { location.reload(); })
                     .catch((error) => { showCustomAlert("ERROR", error.message, "error"); });
             } else {
                 firebase.auth().signInWithEmailAndPassword(email, pass)
-                    .then((userCredential) => { localStorage.setItem('u', userCredential.user.displayName); location.reload(); })
+                    .then((userCredential) => { location.reload(); })
                     .catch((error) => { document.getElementById('authError').style.display = 'block'; });
             }
         }
 
-        function logout() { firebase.auth().signOut().then(() => { localStorage.removeItem('u'); location.reload(); }); }
+        function logout() { firebase.auth().signOut().then(() => { location.reload(); }); }
 
+        // --- PERFIL: datos guardados en Firebase ---
         function openProfile() {
-            const u = localStorage.getItem('u');
-            if(!u) return;
+            const user = firebase.auth().currentUser;
+            if(!user) return;
+            const u = user.displayName;
             document.getElementById('profileSkinImg').src = `https://mc-heads.net/body/${u}`;
             document.getElementById('profileNameLabel').innerText = u;
             document.getElementById('profileTagLabel').innerText = `@${u.toUpperCase()}`;
-            const user = firebase.auth().currentUser;
-            if(user) document.getElementById('displayEmail').value = user.email;
-            document.getElementById('editNickname').value = localStorage.getItem('pNickname') || '';
-            document.getElementById('editBio').value = localStorage.getItem('pBio') || '';
-            document.getElementById('editGender').value = localStorage.getItem('pGender') || '';
-            updateCharCount(); toggleOtherGender();
+            document.getElementById('displayEmail').value = user.email;
+
+            // Cargar datos de perfil desde Firebase
+            db.ref('users/' + user.uid + '/profile').once('value', (snap) => {
+                const profile = snap.val() || {};
+                document.getElementById('editNickname').value = profile.nickname || '';
+                document.getElementById('editBio').value = profile.bio || '';
+                document.getElementById('editGender').value = profile.gender || '';
+                if (profile.gender === 'OTRO') {
+                    document.getElementById('editGenderOther').style.display = 'block';
+                    document.getElementById('editGenderOther').value = profile.genderOther || '';
+                }
+                updateCharCount();
+            });
+            
+            toggleOtherGender();
             document.getElementById('profileModal').style.display = 'flex';
         }
 
@@ -907,7 +1039,7 @@
         function toggleOtherGender() {
             const select = document.getElementById('editGender');
             const otherInput = document.getElementById('editGenderOther');
-            if(select.value === 'OTRO') { otherInput.style.display = 'block'; otherInput.value = localStorage.getItem('pGenderOther') || ''; }
+            if(select.value === 'OTRO') { otherInput.style.display = 'block'; }
             else { otherInput.style.display = 'none'; }
         }
 
@@ -917,93 +1049,265 @@
         }
 
         function saveProfile(skipConfirm = false) {
+            const user = firebase.auth().currentUser;
+            if (!user) return;
+
             const performSave = () => {
-                localStorage.setItem('pNickname', document.getElementById('editNickname').value);
-                localStorage.setItem('pBio', document.getElementById('editBio').value);
-                localStorage.setItem('pGender', document.getElementById('editGender').value);
-                if(document.getElementById('editGender').value === 'OTRO') localStorage.setItem('pGenderOther', document.getElementById('editGenderOther').value);
-                showCustomAlert("ÉXITO", "Cambios guardados", "success", () => { location.reload(); });
+                const profileData = {
+                    nickname: document.getElementById('editNickname').value,
+                    bio: document.getElementById('editBio').value,
+                    gender: document.getElementById('editGender').value
+                };
+                if (profileData.gender === 'OTRO') {
+                    profileData.genderOther = document.getElementById('editGenderOther').value;
+                }
+                db.ref('users/' + user.uid + '/profile').set(profileData).then(() => {
+                    showCustomAlert("ÉXITO", "Cambios guardados", "success", () => { closeProfile(); });
+                });
             };
             if(skipConfirm) performSave();
-            else showCustomAlert("ADVERTENCIA", "¿Guardar cambios?", "warning", performSave);
+            else showCustomAlert("ADVERTENCIA", "¿Guardar cambios?", "warning", performSave, () => {});
         }
 
         function confirmDeleteAccount() {
             showCustomAlert("ATENCIÓN", "¿Eliminar cuenta permanentemente?", "error", () => {
                 const user = firebase.auth().currentUser;
-                if(user) user.delete().then(() => { localStorage.clear(); location.reload(); });
+                if(user) {
+                    // Limpiar datos de Firebase
+                    db.ref('users/' + user.uid).remove();
+                    user.delete().then(() => { location.reload(); });
+                }
             }, () => {});
         }
 
-        function postFaq() {
-            const user = localStorage.getItem('u');
+        // --- FORO: PUBLICAR con modal de advertencia ---
+        function tryPostFaq() {
+            const user = firebase.auth().currentUser;
             const txt = document.getElementById('faqTxt').value;
-            if(!user || !txt.trim()) return;
-            posts.unshift({ id: Date.now(), author: user, content: txt });
-            localStorage.setItem('faqPosts', JSON.stringify(posts));
-            document.getElementById('faqTxt').value = '';
-            renderFaq();
+            if(!user || !txt.trim()) {
+                if (!user) showCustomAlert("ERROR", "Debes iniciar sesión para publicar.", "error");
+                return;
+            }
+            document.getElementById('publishWarningModal').style.display = 'flex';
         }
 
+        function closePublishWarning() { document.getElementById('publishWarningModal').style.display = 'none'; }
+
+        function confirmPublish() {
+            closePublishWarning();
+            const user = firebase.auth().currentUser;
+            const txt = document.getElementById('faqTxt').value;
+            if(!user || !txt.trim()) return;
+            
+            // Obtener nickname del perfil
+            db.ref('users/' + user.uid + '/profile/nickname').once('value', (snap) => {
+                const nickname = snap.val() || user.displayName;
+                const postData = {
+                    id: Date.now(),
+                    authorUid: user.uid,
+                    author: user.displayName,
+                    nickname: nickname,
+                    content: txt,
+                    timestamp: firebase.database.ServerValue.TIMESTAMP,
+                    replies: {}
+                };
+                db.ref('forum/posts').push(postData);
+                document.getElementById('faqTxt').value = '';
+            });
+        }
+
+        // --- FORO: ELIMINAR con doble modal ---
+        function tryDeletePost(firebaseKey) {
+            pendingDeleteId = firebaseKey;
+            document.getElementById('deleteWarningModal').style.display = 'flex';
+        }
+
+        function closeDeleteWarning() { 
+            document.getElementById('deleteWarningModal').style.display = 'none'; 
+            pendingDeleteId = null;
+        }
+
+        function confirmDelete() {
+            document.getElementById('deleteWarningModal').style.display = 'none';
+            if (pendingDeleteId) {
+                db.ref('forum/posts/' + pendingDeleteId).remove().then(() => {
+                    document.getElementById('deleteSuccessModal').style.display = 'flex';
+                    pendingDeleteId = null;
+                });
+            }
+        }
+
+        function closeDeleteSuccess() {
+            document.getElementById('deleteSuccessModal').style.display = 'none';
+        }
+
+        // --- FORO: RESPONDER con flujo de modales ---
+        function openReplyModal(firebaseKey, authorName) {
+            pendingReplyPostId = firebaseKey;
+            document.getElementById('replyModalTitle').innerText = 'RESPONDIENDO A @' + authorName.toUpperCase();
+            document.getElementById('replyTxt').value = '';
+            document.getElementById('replyModal').style.display = 'flex';
+        }
+
+        function closeReplyModal() {
+            document.getElementById('replyModal').style.display = 'none';
+            pendingReplyPostId = null;
+        }
+
+        function submitReply() {
+            const txt = document.getElementById('replyTxt').value;
+            if (!txt.trim()) return;
+            pendingReplyText = txt;
+            // Cerrar modal de respuesta, abrir advertencia
+            document.getElementById('replyModal').style.display = 'none';
+            document.getElementById('replyWarningModal').style.display = 'flex';
+        }
+
+        function cancelReplyWarning() {
+            // Volver al modal de responder
+            document.getElementById('replyWarningModal').style.display = 'none';
+            document.getElementById('replyModal').style.display = 'flex';
+        }
+
+        function confirmReply() {
+            document.getElementById('replyWarningModal').style.display = 'none';
+            const user = firebase.auth().currentUser;
+            if (!user || !pendingReplyPostId || !pendingReplyText.trim()) return;
+
+            db.ref('users/' + user.uid + '/profile/nickname').once('value', (snap) => {
+                const nickname = snap.val() || user.displayName;
+                const replyData = {
+                    authorUid: user.uid,
+                    author: user.displayName,
+                    nickname: nickname,
+                    content: pendingReplyText,
+                    timestamp: firebase.database.ServerValue.TIMESTAMP
+                };
+                db.ref('forum/posts/' + pendingReplyPostId + '/replies').push(replyData);
+                pendingReplyPostId = null;
+                pendingReplyText = '';
+            });
+        }
+
+        // --- FORO: RENDER ---
         function renderFaq() {
             const list = document.getElementById('faqList');
-            const currentUser = localStorage.getItem('u');
+            const currentUser = firebase.auth().currentUser;
+            const lang = currentLang;
             if(!list) return;
             list.innerHTML = '';
+            
             posts.forEach(p => {
+                const isOwner = currentUser && currentUser.uid === p.authorUid;
+                const displayName = p.nickname || p.author;
+                const editBtnText = translations[lang].faq_edit_btn || 'EDITAR COMENTARIO';
+                const replyBtnText = translations[lang].faq_reply_btn || 'RESPONDER';
+                const deleteBtnText = translations[lang].faq_delete_btn || 'ELIMINAR COMENTARIO';
+
+                let actionsHtml = '';
+                if (isOwner) {
+                    actionsHtml = `
+                        <div class="faq-actions">
+                            <button class="faq-btn faq-btn-edit" onclick="openEdit('${p.firebaseKey}')"><i class="fas fa-pen"></i> ${editBtnText}</button>
+                            <button class="faq-btn faq-btn-reply" onclick="openReplyModal('${p.firebaseKey}', '${(p.nickname || p.author).replace(/'/g, "\\'")}')"><i class="fas fa-share"></i> ${replyBtnText}</button>
+                            <button class="faq-btn faq-btn-delete" onclick="tryDeletePost('${p.firebaseKey}')"><i class="fas fa-trash"></i> ${deleteBtnText}</button>
+                        </div>`;
+                } else if (currentUser) {
+                    actionsHtml = `
+                        <div class="faq-actions">
+                            <button class="faq-btn faq-btn-reply" onclick="openReplyModal('${p.firebaseKey}', '${(p.nickname || p.author).replace(/'/g, "\\'")}')"><i class="fas fa-share"></i> ${replyBtnText}</button>
+                        </div>`;
+                }
+
+                // Render replies
+                let repliesHtml = '';
+                if (p.replies) {
+                    const repliesArr = Object.values(p.replies);
+                    repliesArr.forEach(r => {
+                        const rDisplayName = r.nickname || r.author;
+                        repliesHtml += `
+                            <div class="faq-reply-card">
+                                <div class="faq-author-row">
+                                    <img class="faq-author-avatar" src="https://mc-heads.net/avatar/${r.author}" alt="">
+                                    <div class="faq-author-info">
+                                        <span class="faq-author-name">${rDisplayName}</span>
+                                        <span class="faq-author-tag">(@${r.author.toUpperCase()})</span>
+                                    </div>
+                                </div>
+                                <div class="faq-text">${r.content}</div>
+                            </div>`;
+                    });
+                }
+
                 list.innerHTML += `
                     <div class="faq-card">
-                        <span class="faq-author">${p.author}</span>
+                        <div class="faq-author-row">
+                            <img class="faq-author-avatar" src="https://mc-heads.net/avatar/${p.author}" alt="">
+                            <div class="faq-author-info">
+                                <span class="faq-author-name">${displayName}</span>
+                                <span class="faq-author-tag">(@${p.author.toUpperCase()})</span>
+                            </div>
+                        </div>
                         <div class="faq-text">${p.content}</div>
-                        ${currentUser === p.author ? `<div class="faq-actions"><button class="btn-mini" onclick="openEdit(${p.id})">EDITAR</button><button class="btn-mini btn-delete" onclick="deletePost(${p.id})">ELIMINAR</button></div>` : ''}
+                        ${actionsHtml}
+                        ${repliesHtml ? '<div class="faq-replies">' + repliesHtml + '</div>' : ''}
                     </div>`;
             });
         }
 
-        function openEdit(id) {
-            editingId = id;
-            document.getElementById('editFaqTxt').value = posts.find(p => p.id === id).content;
+        function openEdit(firebaseKey) {
+            editingId = firebaseKey;
+            const post = posts.find(p => p.firebaseKey === firebaseKey);
+            if (!post) return;
+            document.getElementById('editFaqTxt').value = post.content;
             document.getElementById('editModal').style.display = 'flex';
         }
         function closeEdit() { document.getElementById('editModal').style.display = 'none'; }
         function saveEdit() {
-            posts.find(p => p.id === editingId).content = document.getElementById('editFaqTxt').value;
-            localStorage.setItem('faqPosts', JSON.stringify(posts));
-            closeEdit(); renderFaq();
-        }
-        function deletePost(id) {
-            showCustomAlert("ELIMINAR", "¿Borrar publicación?", "warning", () => {
-                posts = posts.filter(p => p.id !== id);
-                localStorage.setItem('faqPosts', JSON.stringify(posts));
-                renderFaq();
-            }, () => {});
+            if (!editingId) return;
+            const newContent = document.getElementById('editFaqTxt').value;
+            db.ref('forum/posts/' + editingId + '/content').set(newContent);
+            closeEdit();
         }
 
+        // --- INIT ---
         window.onload = () => {
-            const savedLang = localStorage.getItem('prefLang') || 'es';
-            // Actualizar texto botón inicial
-            document.getElementById('currentLangText').innerText = savedLang === 'es' ? '🇪🇸 ES' : '🇺🇸 EN';
-            
-            updateUITranslations(savedLang);
+            // Idioma: primero cookie, luego se sobreescribe con Firebase si hay sesión
+            const cookieLang = getCookie('prefLang');
+            if (cookieLang) {
+                currentLang = cookieLang;
+            }
+            updateLangButton(currentLang);
+            updateUITranslations(currentLang);
             updateServerStatus(); setInterval(updateServerStatus, 30000);
             renderLlaves();
+            loadForumPosts();
+
             firebase.auth().onAuthStateChanged((user) => {
                 if (user) {
                     const u = user.displayName;
-                    localStorage.setItem('u', u);
                     document.getElementById('authButtons').style.display = 'none';
                     document.getElementById('userLogged').style.display = 'flex';
                     document.getElementById('btnEditProfile').style.display = 'flex';
                     document.getElementById('userTag').innerText = u;
                     document.getElementById('headImg').src = `https://mc-heads.net/avatar/${u}`;
+
+                    // Cargar idioma desde Firebase
+                    db.ref('users/' + user.uid + '/preferences/lang').once('value', (snap) => {
+                        const fbLang = snap.val();
+                        if (fbLang) {
+                            currentLang = fbLang;
+                            updateLangButton(currentLang);
+                            updateUITranslations(currentLang);
+                            renderLlaves();
+                        }
+                    });
                 } else {
-                    localStorage.removeItem('u');
                     document.getElementById('authButtons').style.display = 'flex';
                     document.getElementById('userLogged').style.display = 'none';
                     document.getElementById('btnEditProfile').style.display = 'none';
                 }
             });
-            renderFaq();
         };
 
         document.getElementById('theme-toggle').onclick = () => { document.body.setAttribute('data-theme', document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light'); };
